@@ -16,8 +16,8 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
-import UserBadgeItem from "../UserAvatar/UserBadgeItem";
-import UserListItem from "../UserAvatar/UserListItem";
+import UserBadgeItem from "../userAvatar/UserBadgeItem";
+import UserListItem from "../userAvatar/UserListItem";
 
 const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,7 +59,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-      //console.log(data);
+      console.log(data);
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -81,7 +81,7 @@ const GroupChatModal = ({ children }) => {
   const handleSubmit = async () => {
     if (!groupChatName || !selectedUsers) {
       toast({
-        title: "Please fill all the fields",
+        title: "Please fill all the feilds",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -151,7 +151,7 @@ const GroupChatModal = ({ children }) => {
             </FormControl>
             <FormControl>
               <Input
-                placeholder="Add Users eg: John, Pratyush, Jane"
+                placeholder="Add Users eg: John, Piyush, Jane"
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
               />

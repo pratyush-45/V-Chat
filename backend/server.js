@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json()); // to accept json data
 
 // app.get("/", (req, res) => {
-//   res.send("API is Running Successfully");
+//   res.send("API Running!");
 // });
 
 app.use("/api/user", userRoutes);
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
   );
 } else {
   app.get("/", (req, res) => {
-    res.send("API is Running Successfully");
+    res.send("API is running..");
   });
 }
 
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const server = app.listen(PORT, console.log(`Server running on PORT ${PORT}`));
 

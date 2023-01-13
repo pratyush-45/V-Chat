@@ -1,49 +1,50 @@
+import { Button } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/hooks";
+import { Input } from "@chakra-ui/input";
+import { Box, Text } from "@chakra-ui/layout";
 import {
-  Box,
-  Button,
   Menu,
   MenuButton,
-  Text,
-  Tooltip,
-  Avatar,
-  MenuList,
-  MenuItem,
   MenuDivider,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/menu";
+import {
   Drawer,
-  DrawerOverlay,
+  DrawerBody,
   DrawerContent,
   DrawerHeader,
-  DrawerBody,
-  Input,
-  Spinner,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
+  DrawerOverlay,
+} from "@chakra-ui/modal";
+import { Tooltip } from "@chakra-ui/tooltip";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import React, { useState } from "react";
-import { ChatState } from "../../Context/ChatProvider";
-import ProfileModal from "./ProfileModal";
+import { Avatar } from "@chakra-ui/avatar";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
+import { useToast } from "@chakra-ui/toast";
 import ChatLoading from "../ChatLoading";
-import UserListItem from "../UserAvatar/UserListItem";
-import { getSender } from "../../config/ChatLogics";
+import { Spinner } from "@chakra-ui/spinner";
+import ProfileModal from "./ProfileModal";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
+import { getSender } from "../../config/ChatLogics";
+import UserListItem from "../userAvatar/UserListItem";
+import { ChatState } from "../../Context/ChatProvider";
 
-const SideDrawer = () => {
+function SideDrawer() {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
 
   const {
-    user,
     setSelectedChat,
-    chats,
-    setChats,
+    user,
     notification,
     setNotification,
+    chats,
+    setChats,
   } = ChatState();
 
   const toast = useToast();
@@ -106,7 +107,6 @@ const SideDrawer = () => {
       const { data } = await axios.post(`/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
-
       setSelectedChat(data);
       setLoadingChat(false);
       onClose();
@@ -142,7 +142,7 @@ const SideDrawer = () => {
           </Button>
         </Tooltip>
         <Text fontSize="2xl" fontFamily="Work sans">
-          V-Chat
+          Talk-A-Tive
         </Text>
         <div>
           <Menu>
@@ -221,6 +221,6 @@ const SideDrawer = () => {
       </Drawer>
     </>
   );
-};
+}
 
 export default SideDrawer;

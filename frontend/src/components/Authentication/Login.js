@@ -1,28 +1,21 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
-  VStack,
-  useToast,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Button } from "@chakra-ui/button";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import { VStack } from "@chakra-ui/layout";
+import { useState } from "react";
 import axios from "axios";
-//import { json } from "express";
+import { useToast } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+  const toast = useToast();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const history = useHistory();
-
   const [loading, setLoading] = useState(false);
-  const toast = useToast();
 
-  const handleClick = () => setShow(!show);
+  const history = useHistory();
 
   const submitHandler = async () => {
     setLoading(true);
@@ -77,24 +70,24 @@ const Login = () => {
   };
 
   return (
-    <VStack spacing="5px" color="black">
+    <VStack spacing="10px">
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel>Email Address</FormLabel>
         <Input
-          placeholder="Enter your email"
           value={email}
+          type="email"
+          placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
         />
       </FormControl>
-
       <FormControl id="password" isRequired>
         <FormLabel>Password</FormLabel>
-        <InputGroup>
+        <InputGroup size="md">
           <Input
-            type={show ? "text" : "password"}
-            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            type={show ? "text" : "password"}
+            placeholder="Enter password"
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -103,7 +96,6 @@ const Login = () => {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-
       <Button
         colorScheme="blue"
         width="100%"
@@ -113,7 +105,6 @@ const Login = () => {
       >
         Login
       </Button>
-
       <Button
         variant="solid"
         colorScheme="red"
